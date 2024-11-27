@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session to track admin login
+session_start(); 
 $is_admin = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true; // Check if admin is logged in
 ?>
 <!DOCTYPE html>
@@ -17,12 +17,12 @@ $is_admin = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] 
     <?php include "nav.php"; ?>
 
     <!-- Admin Login Button -->
-    <button id="admin-login-button" style="position: fixed; top: 10px; right: 10px;">
+    <button id="admin-login-button">
         <?php echo $is_admin ? "Logout" : "Admin Login"; ?>
     </button>
 
     <!-- Admin Login Popup -->
-    <div id="admin-login-popup" class="popup" style="display: none;">
+    <div id="admin-login-popup" class="popup">
         <div class="popup-content">
             <span id="close-popup">&times;</span>
             <h2>Admin Login</h2>
@@ -37,7 +37,7 @@ $is_admin = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] 
     </div>
 
     <!-- Search Form -->
-    <form method="GET" action="catalog.php" class="search-form" style="position: relative;">
+    <form method="GET" action="catalog.php" class="search-form">
         <input type="text" name="query" id="search-input" placeholder="Search for products..." autocomplete="off"
                value="<?php echo isset($_GET['query']) ? htmlspecialchars($_GET['query']) : ''; ?>">
         <button type="submit">Search</button>
@@ -45,12 +45,11 @@ $is_admin = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] 
 
     <!-- Add New Item Button -->
     <?php if ($is_admin): ?>
-        <button id="add-item-button" style="margin-top: 10px;">Add New Item</button>
+        <button id="add-item-button">Add New Item</button>
     <?php endif; ?>
 
     <!-- Add New Item Modal -->
-    <div id="add-item-modal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-        background-color: white; border: 1px solid #ccc; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); z-index: 1000;">
+    <div id="add-item-modal">
         <h3>Add New Item</h3>
         <form id="add-item-form" method="POST" action="add_item.php">
             <label for="PartName">Part Name:</label>
@@ -68,8 +67,7 @@ $is_admin = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] 
     </div>
 
     <!-- Modal Background -->
-    <div id="modal-bg" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
+    <div id="modal-bg"></div>
 
     <!-- Dynamic Results Container -->
     <div id="search-results"></div>
