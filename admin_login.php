@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Replace these with secure credentials
+    
     $admin_username = 'admin';
     $admin_password = 'password123';
 
