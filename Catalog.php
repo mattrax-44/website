@@ -72,20 +72,6 @@ $is_admin = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] 
     <!-- Dynamic Results Container -->
     <div id="search-results"></div>
 
-    <?php
-        // Retrieve search query from URL (when the search form is submitted)
-        $search_query = isset($_GET['query']) ? trim($_GET['query']) : '';
-
-        // Set the cookie when the search is submitted
-        if ($search_query !== '') {
-            setcookie('search_query', $search_query, time() + (30 * 24 * 60 * 60), '/');  // Cookie expires in 30 days
-        } elseif (isset($_COOKIE['search_query'])) {
-            $search_query = $_COOKIE['search_query']; // Get search query from cookie
-        } else {
-            $search_query = '';  // Default to empty if no query or cookie
-        }
-    ?>
-
     <main>
         <?php include "main.php"; ?>
     </main>
@@ -94,6 +80,7 @@ $is_admin = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] 
 
     <script>
         $(document).ready(function () {
+            // When typing in the search input, show suggestions
             $('#search-input').on('input', function () {
                 const query = $(this).val();
                 if (query.length > 0) {
@@ -110,60 +97,53 @@ $is_admin = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] 
                 }
             });
 
-            // Handle click on a result item
+            // When a search result is clicked, populate the input field and hidden inputs
             $(document).on('click', '.search-result-item', function () {
-                const selectedProduct = $(this).text();
-                $('#search-input').val(selectedProduct);
-
-                // Automatically trigger the search when a result is clicked
-                $('form').submit();
-                $('#search-results').hide();  // Hide the results after selection
+                const selectedProduct = $(this).text();  // Get selected item text
+                const partCode = $(this).data('partcode');  // Get the associated PartCode
+                
+                $('#search-input').val(selectedProduct);  // Set it in the search input field
+                $('#PartCode').val(partCode);  // Set the PartCode in the hidden input field
+                $('#search-results').hide();  // Hide the dropdown
             });
 
-            // Hide results when clicking outside
+            // Hide the results if clicking outside the form
             $(document).click(function (e) {
                 if (!$(e.target).closest('.search-form').length) {
                     $('#search-results').hide();
                 }
             });
 
-            // Admin login popup logic
+            // Admin login button logic
             $('#admin-login-button').on('click', function () {
                 <?php if ($is_admin): ?>
-                    // If admin is logged in, logout
                     window.location.href = 'logout.php';
                 <?php else: ?>
-                    // Show login popup if not logged in
                     $('#admin-login-popup').show();
                 <?php endif; ?>
             });
 
+            // Close admin login popup
             $('#close-popup').on('click', function () {
                 $('#admin-login-popup').hide();
             });
 
-            // Show the Add New Item modal
+            // Add new item modal logic
             $('#add-item-button').on('click', function () {
                 $('#add-item-modal').show();
                 $('#modal-bg').show();
             });
 
-            // Close the Add New Item modal
             $('#close-modal').on('click', function () {
                 $('#add-item-modal').hide();
                 $('#modal-bg').hide();
             });
 
-            // Hide the modal when the background is clicked
             $('#modal-bg').on('click', function () {
                 $('#add-item-modal').hide();
                 $('#modal-bg').hide();
             });
         });
-
-        
     </script>
-
-
 </body>
 </html>
