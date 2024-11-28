@@ -160,6 +160,10 @@ $is_admin = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] 
                 $('#modal-bg').hide();
             });
         });
+
+        
     </script>
+
+
 </body>
 </html>
