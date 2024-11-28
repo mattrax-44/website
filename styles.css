@@ -1,18 +1,18 @@
-/* General Reset */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body Styling */
+
 body {
     font-family: sans-serif;
     min-height: 100%;
     color: #555;
 }
 
-/* Navigation Bar */
+
 nav {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -49,7 +49,7 @@ nav a.active {
     border-radius: 3px;
 }
 
-/* Header */
+
 header {
     padding: 40px 20px;
     background-color: #f4f4f4;
@@ -62,7 +62,7 @@ header .sub-title {
     line-height: 28px;
 }
 
-/* Main Content */
+
 main {
     padding: 20px;
     display: grid;
@@ -78,7 +78,7 @@ main .section-title {
     text-decoration: underline;
 }
 
-/* Sidebar */
+
 main .left {
     border-right: thin solid #d4d4d4;
     padding-right: 20px;
@@ -96,7 +96,7 @@ main .left a:hover {
     text-decoration: underline;
 }
 
-/* Product List */
+
 main .right {
     padding: 10px;
 }
@@ -139,7 +139,7 @@ main .right .product-code {
     margin-top: 5px;
 }
 
-/* Footer */
+
 footer {
     position: fixed;
     bottom: 0;
@@ -252,7 +252,7 @@ form button:hover {
   font-weight: 300;
 }
 
-/* Introduction section styling */
+
 .intro {
   background-color: #ecf0f1;
   padding: 30px 20px;
@@ -261,14 +261,13 @@ form button:hover {
 
 .intro p {
   font-size: 1.1em;
-  line-height: 1.8; /* Increased line-height for more vertical spacing between lines */
-  margin-bottom: 25px; /* Increased margin-bottom between paragraphs */
+  line-height: 1.8; 
+  margin-bottom: 25px; 
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Services section styling */
 .services {
   padding: 40px 20px;
   background-color: #fff;
@@ -277,7 +276,7 @@ form button:hover {
 .services h2 {
   text-align: center;
   font-size: 2em;
-  margin-bottom: 30px; /* Increased space below the main heading */
+  margin-bottom: 30px;
 }
 
 .service-item {
@@ -290,16 +289,16 @@ form button:hover {
 
 .service-item h3 {
   font-size: 1.6em;
-  margin-bottom: 15px; /* Increased space below the service title */
+  margin-bottom: 15px; 
 }
 
 .service-item p {
   font-size: 1.1em;
-  line-height: 1.8; /* Increased line-height for better readability */
-  margin-bottom: 20px; /* Space between service paragraphs */
+  line-height: 1.8; 
+  margin-bottom: 20px; 
 }
 
-/* Commitment section styling */
+
 .commitment {
   padding: 30px 20px;
   text-align: center;
@@ -309,11 +308,65 @@ form button:hover {
 
 .commitment h3 {
   font-size: 2em;
-  margin-bottom: 30px; /* Increased space below the commitment title */
+  margin-bottom: 30px; 
 }
 
 .commitment p {
   font-size: 1.2em;
-  line-height: 1.8; /* Increased line-height for better readability */
-  margin-bottom: 20px; /* Space between paragraphs */
+  line-height: 1.8; 
+  margin-bottom: 20px; 
+}
+#admin-login-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.popup-content {
+    text-align: center;
+}
+
+#modal-bg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.search-form {
+    position: relative;
+}
+
+#add-item-button {
+    margin-top: 10px;
+}
+
+#add-item-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
 }
