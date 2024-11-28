@@ -15,7 +15,6 @@ if (!empty($query)) {
             SELECT PartName, PartCode 
             FROM catalog 
             WHERE PartName LIKE ? 
-            OR PartCode LIKE ? 
             LIMIT 10
         ");
         
@@ -23,7 +22,7 @@ if (!empty($query)) {
         $like_query = '%' . $query . '%';
         
         // Bind parameters to prevent SQL injection
-        $stmt->bind_param('ss', $like_query, $like_query);
+        $stmt->bind_param('s', $like_query);
         $stmt->execute();
         
         // Fetch matching products
@@ -38,7 +37,7 @@ if (!empty($query)) {
 if (!empty($results)) {
     foreach ($results as $result) {
         // Display both PartName and PartCode as a suggestion
-        echo '<div class="search-result-item">' . htmlspecialchars($result['PartName']) . ' (' . htmlspecialchars($result['PartCode']) . ')</div>';
+        echo '<div class="search-result-item" data-partcode="' . htmlspecialchars($result['PartCode']) . '">' . htmlspecialchars($result['PartName']) . '</div>';
     }
 } else {
     echo '<div class="search-result-item">No products found</div>';
