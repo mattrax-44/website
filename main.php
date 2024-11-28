@@ -1,9 +1,11 @@
 <?php
 require 'functions.php';
-if (session_status() === PHP_SESSION_NONE) {
-    session_start(); // Start a new session only if none is active
-}
+require_once 'vendor/autoload.php'; // Ensure Composer's autoloader is included
 
+// Start the session if it's not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Check if admin is logged in
 $is_admin = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true;
@@ -40,49 +42,16 @@ if ($search_query !== '') {
     $products = getCatalogProducts(10);  // Adjust limit if needed
 }
 
+// Set up Twig
+$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/templates'); // Path to the templates folder
+$twig = new \Twig\Environment($loader, [
+    'cache' => false, // Disable cache for development
+]);
+
+// Render the template with the products and search query data
+echo $twig->render('main.twig', [
+    'products' => $products,
+    'is_admin' => $is_admin,
+    'search_query' => $search_query
+]);
 ?>
-
-<div class="left">
-    <div class="section-title">Products</div>
-    <a href="">Parts</a>
-</div>
-
-<div class="right">
-    <div class="section-title">Search Results</div>
-
-    <?php
-    if (!empty($products)) {
-        foreach ($products as $product) {
-    ?>
-    <div class="product-item">
-        <div class="product-right">
-            <img src="<?php echo htmlspecialchars($product['PartImage']); ?>" alt="Part Image">
-        </div>
-
-        <div class="product-left">
-            <p class="product-right">
-                <a href=""><?php echo htmlspecialchars($product['PartName']); ?></a>
-            </p>
-            <p class="PartCode">Code: <?php echo htmlspecialchars($product['PartCode']); ?></p>
-            
-            <?php if ($is_admin): ?>
-            <div class="admin-actions">
-                <!-- Delete Form -->
-                <form method="POST" action="delete_product.php" style="display:inline;">
-                    <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
-                    <button type="submit" class="delete-button">Delete</button>
-                </form>
-
-                <!-- Edit Button -->
-                <a href="edit_product.php?id=<?php echo htmlspecialchars($product['id']); ?>" class="edit-button">Edit</a>
-            </div>
-            <?php endif; ?>
-        </div>
-    </div>
-    <?php
-        }
-    } else {
-        echo "<p>No products found.</p>";
-    }
-    ?>
-</div>
